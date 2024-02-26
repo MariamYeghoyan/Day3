@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabbed Interface</title>
+<style>
+  .tab {
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+  .tab-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin-right: 5px;
+  }
+  .tab-button.active {
+    background-color: white;
+  }
+</style>
+</head>
+<body>
+  <div id="tabs">
+    <div class="tab-button" data-tab="tab1">Tab 1</div>
+    <div class="tab-button" data-tab="tab2">Tab 2</div>
+    <div class="tab-button" data-tab="tab3">Tab 3</div>
+  </div>
+  <div id="tabContent"></div>
+
+  <script>
+    const tabs = {
+      tab1: "Content for Tab 1",
+      tab2: "Content for Tab 2",
+      tab3: "Content for Tab 3"
+    };
+
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabContent = document.getElementById("tabContent");
+
+    function showTab(tabId) {
+      tabContent.textContent = tabs[tabId];
+    }
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const tabId = button.getAttribute("data-tab");
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        showTab(tabId);
+      });
+    });
+
+    showTab("tab1");
+    document.querySelector("[data-tab='tab1']").classList.add("active");
+  </script>
+</body>
+</html>

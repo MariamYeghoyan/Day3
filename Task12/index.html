@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Slider</title>
+<style>
+  .slider {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  button {
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="slider">
+    <img id="sliderImage" src="images/image1.jpg" alt="Slider Image">
+    <br>
+    <button id="prevButton">Previous</button>
+    <button id="nextButton">Next</button>
+  </div>
+
+  <script>
+    const images = [
+      "images/image1.jpg",
+      "images/image2.jpg",
+      "images/image3.jpg"
+    ];
+    let currentIndex = 0;
+    const sliderImage = document.getElementById("sliderImage");
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+
+    function showImage(index) {
+      sliderImage.src = images[index];
+    }
+
+    prevButton.addEventListener("click", function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextButton.addEventListener("click", function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+    showImage(currentIndex);
+  </script>
+</body>
+</html>
